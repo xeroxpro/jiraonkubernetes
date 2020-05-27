@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jira-app
+  namespace: jira
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+     app: jira-service
+  template:
+    metadata:
+     labels:
+      app: jira-service
+    spec:
+      containers:
+      - name: jira
+        image: laroxyl/jira:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
